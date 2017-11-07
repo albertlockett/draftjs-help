@@ -1,0 +1,17 @@
+{
+  "name": "test-thing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "start-storybook -p 9001 -c ./config"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@storybook/react": "3.2.14",
+    "draft-js": "0.10.0",
+    "react": "15.4.2",
+    "react-dom": "15.4.2"
+  }
+}
