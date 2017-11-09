@@ -6,59 +6,33 @@ import {
   EditorState,
   DefaultDraftBlockRenderMap,
   RichUtils
-} from 'draft-js';
-
-class MyCustomBlock extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className='MyCustomBlock'>
-        {this.props.children}
-      </div>
-    );
-  }
-}
-
-const blockRenderMap = Immutable.Map({
-  'MyCustomBlock': {
-    element: 'h1',
-    wrapper: MyCustomBlock,
-  }
-});
-
-const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
-
+} from 'draft-js/lib/Draft';
 
 class TestEditor extends React.Component {
-
 
   constructor(props, context) {
     super(props, context);
     this.state = { editorState: EditorState.createEmpty() }
-    this.makeCustom = this.makeCustom.bind(this);
     this.onChange = this.onChange.bind(this);
-  }
-
-  makeCustom() {
-    const blockType = 'MyCustomBlock';
-    this.onChange(RichUtils.toggleBlockType(this.state.editorState, blockType));
+    this.onTab = this.onTab.bind(this);
   }
 
   onChange(editorState) {
     this.setState({ editorState });
   }
 
+  onTab() {
+    console.log("TAB EVENT FIRED");
+  }
+
   render() {
+    console.log("I HAVE RENDERED");
     return(
       <div>
-        <button onClick={this.makeCustom}>Click</button>
         <Editor
-          blockRenderMap={extendedBlockRenderMap}
           editorState={this.state.editorState}
-          onChange={this.onChange} />
+          onChange={this.onChange}
+          onTab={this.onTab} />
       </div>
     );
   }
